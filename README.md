@@ -1,6 +1,19 @@
 # DevOps Playground 3 - Hands on Docker Swarm
 ## Mining bitcoins using everyone's laptops with Docker Swarm
 
+### Pre Steps 
+
+#### How to guide: Open a firewall port
+
+* windows 7
+http://windows.microsoft.com/en-gb/windows/open-port-windows-firewall#1TC=windows-7
+* windows 8, 10
+http://windows.microsoft.com/en-gb/windows-8/windows-firewall-from-start-to-finish
+* mac osx
+https://support.apple.com/en-gb/HT201642
+* ubuntu
+http://www.howtogeek.com/115116/how-to-configure-ubuntus-built-in-firewall/
+
 
 ### Steps to follow
 
