@@ -75,3 +75,17 @@ From the command line, we execute the following command
 ​
 3. Query your node by name
 `curl -X GET http://<manager-ip>:<port>/containers/<container-name>/json`
+
+## Useful commands
+* Run an image in a container  
+`docker run <image-name>`
+* Get the containers running on your host at the moment, with the -a option to see stopped containers too  
+`docker ps [-a]`
+* Stop a container using its id  
+`docker stop <container-id>`
+* Remove a container, with the -f option to force the container to stop if it is running    
+`docker rm [-f] <container-id>`
+* Print the logs of the container  
+`docker logs <container-id>`
+* Attach to a container  
+`docker attach <container-id>`
