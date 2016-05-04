@@ -2,7 +2,7 @@
 ## Mining bitcoins using everyone's laptops with Docker Swarm
 
 ### Pre-requisites
-1. Download Vagrant and install it.   
+1. Download Vagrant and Virtualbox and install them.   
 2. If you are running Windows, install Git Bash
 3. Open ports 2375, 4000 and 8500 or disable firewall
 4. Change the hostname in the Vagrantfile, line 4, check that your hostname is unique
