@@ -13,11 +13,25 @@ Start the vagrant machine, which is going to download and configure everything. 
 `vagrant up`
 
 
+### _On the Docker Swarm manager_, create the consul server and the swarm manager
+6. Create a consul server (Only on the manager)   
+`docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap`
+7. Start the swarm manager (Only on the manager)   
+`docker run -d -p 4000:4000 swarm manage -H :4000 --advertise <manager-ip>:4000 consul://<manager-ip>:8500`
+
 ### Connect to the VM and join the Docker Swarm
 1. Connect to the vagrant machine through SSH  
   `vagrant ssh`
 2. Start the swarm clients   
 `docker run -d swarm join --advertise=<your-vm-ip>:2375 consul://<manager-ip>:8500`
+
+### _On the Docker Swarm manager_, start the miners
+1. Start one miner   
+`docker -H :4000 run -d kourkis/miner`
+2. To remove all of the miners   
+`docker -H :4000 ps -q | xargs docker -H :40bbbb00 rm -f`
+3. To create several miners in a single command   
+`for i in {1..5}; do docker -H :4000 run -d kourkis/miner; done`
 
 
 ## Remote API
