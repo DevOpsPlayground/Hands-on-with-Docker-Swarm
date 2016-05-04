@@ -21,8 +21,7 @@ Start the vagrant machine, which is going to download and configure everything. 
 
 
 ## Remote API
-​
-Docker Swarm uses the same API calls as Docker. Visit [the API documentation](https://docs.docker.com/engine/reference/api) to get more details.
+​Most Docker API endpoints are implemented by Swarm, meaning that tools built on top of it will work out of the box, including the Docker CLI. Visit [the API documentation](https://docs.docker.com/engine/reference/api) to get more details.
 ​
 ### To enable the Remote Api Access to a Docker Host:
 There is no need to do it during this meetup, as this is taken care of in the Vagrantfile. This is simply for your information.
@@ -33,14 +32,15 @@ Add `-H tcp://<ip>:<port>` to the `DOCKER_OPTS` in `/etc/default/docker`.
 ​
 
 ### Using the Remote API
+The following GET commands can be run from your web browser.
 #### Get running containers on the Docker Swarm cluster
 ​
 `http://<manager-ip>:<port>/containers/json`
 * `<manager-ip>` - The Docker Swarm manager IP. Docker Swarm Manager IP to access containers in the cluster level.
 * `<port>` - The Docker Swarm Manager listening port.
 ​
-From the command line, we execute the following command
-* command: `curl -X GET http://<manager-ip>:<port>/containers/json`
+* (Alternative) From the command line, we execute the following command  
+`curl -X GET http://<manager-ip>:<port>/containers/json`
 ​
 
 #### Get a specific Container information
@@ -50,33 +50,37 @@ From the command line, we execute the following command
 * `<manager-ip>` - The Docker Swarm manager IP. Docker Swarm Manager IP to access containers in the cluster level.
 * `<port>` - The Docker Swarm Manager listening port.
 ​
-From the command line, we execute the following command
-* command: `curl -X GET http://<manager-ip>:<port>/containers/<container-id or container-name>/json`
+* (Alternative) From the command line, we execute the following command  
+`curl -X GET http://<manager-ip>:<port>/containers/<container-id or container-name>/json`
 ​
 
 #### Get logs from a specific Container ID
 
 `http://<docker-node-ip>:<open-port>/containers/<container-id or container-name>/logs?stderr=1&stdout=1&`
-* Include the `logs` keyword after the container id`
+* Include the `logs` keyword after the container id/name
 * `stdout` – `1/True/true` or `0/False/false`, show `stdout` log. Default false.
 * `stderr` – `1/True/true` or `0/False/false`, show `stderr` log. Default false.
 ​
-From the command line, we execute the following command
-* command: `curl -X GET http://<manager-ip>:<port>/containers/<container-id or container-name>/logs?stderr=1&stdout=1&`
+* (Alternative) From the command line, we execute the following command  
+`curl -X GET http://<manager-ip>:<port>/containers/<container-id or container-name>/logs?stderr=1&stdout=1&`
 ​
 
 #### Example: Running container and inspecting it
+What the `docker run` command would normally do, is to create a container and then start it.
+In this example you are going to create a `hello-world` container, then start it and finally check info about it (including the status, node name, etc). Ensure you replace the fields between `<` and `>` with the correct information.
 
-1. Create the hello-world container:
+1. Create the hello-world container:  
 `curl -H "Content-Type: application/json" -X POST -d '{"Hostname": "hello-world-node", "Image": "hello-world"}' http://<manager-ip>:<port>/containers/create?name=<container-name>`
 ​
-2. Start the hello-wold container:
+2. Start the hello-wold container by its name:  
 `curl -X POST -H "Content-Type: application/json" -d '{}' http://<manager-ip>:<port>containers/<container-name>/start`
 ​
-3. Query your node by name
+3. Query your node by its name:  
 `curl -X GET http://<manager-ip>:<port>/containers/<container-name>/json`
 
 ## Useful commands
+* List images in the docker host  
+`docker images`
 * Run an image in a container  
 `docker run <image-name>`
 * Get the containers running on your host at the moment, with the -a option to see stopped containers too  
@@ -89,3 +93,12 @@ From the command line, we execute the following command
 `docker logs <container-id>`
 * Attach to a container  
 `docker attach <container-id>`
+
+## What is next
+* Add TLS authentication for Security
+* Define Affinity rules. This is useful to for example to guarantee two highly resource consuming containers don’t get scheduled on the same machine
+
+## Removing the environment
+
+1. Exit from the VM
+2. Execute `vagrant destroy` from the same directory we have been working on.
