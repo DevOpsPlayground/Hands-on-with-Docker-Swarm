@@ -31,6 +31,7 @@ Add `-H tcp://<ip>:<port>` to the `DOCKER_OPTS` in `/etc/default/docker`.
 [Reference](http://www.virtuallyghetto.com/2014/07/quick-tip-how-to-enable-docker-remote-api.html)
 * With security: For securing it see [this documentation.](https://coreos.com/os/docs/latest/customizing-docker.html)
 ​
+
 ### Using the Remote API
 #### Get running containers on the Docker Swarm cluster
 ​
