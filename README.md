@@ -42,6 +42,7 @@ Add `-H tcp://<ip>:<port>` to the `DOCKER_OPTS` in `/etc/default/docker`.
 From the command line, we execute the following command
 * command: `curl -X GET http://<manager-ip>:<port>/containers/json`
 ​
+
 #### Get a specific Container information
 ​
 `http://<manager-ip>:<port>/containers/<container-id or container-name>/json`
@@ -52,10 +53,10 @@ From the command line, we execute the following command
 From the command line, we execute the following command
 * command: `curl -X GET http://<manager-ip>:<port>/containers/<container-id or container-name>/json`
 ​
+
 #### Get logs from a specific Container ID
-​
+
 `http://<docker-node-ip>:<open-port>/containers/<container-id or container-name>/logs?stderr=1&stdout=1&`
-​
 * Include the `logs` keyword after the container id`
 * `stdout` – `1/True/true` or `0/False/false`, show `stdout` log. Default false.
 * `stderr` – `1/True/true` or `0/False/false`, show `stderr` log. Default false.
@@ -63,8 +64,9 @@ From the command line, we execute the following command
 From the command line, we execute the following command
 * command: `curl -X GET http://<manager-ip>:<port>/containers/<container-id or container-name>/logs?stderr=1&stdout=1&`
 ​
+
 #### Example: Running container and inspecting it
-​
+
 1. Create the hello-world container:
 `curl -H "Content-Type: application/json" -X POST -d '{"Hostname": "hello-world-node", "Image": "hello-world"}' http://<manager-ip>:<port>/containers/create?name=<container-name>`
 ​
